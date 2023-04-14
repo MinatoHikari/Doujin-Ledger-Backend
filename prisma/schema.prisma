@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Group {
+  id      Int      @id @default(autoincrement())
+  name    String   @unique
+  goods   Good[]
+  tickets Ticket[]
+}
+
+model Good {
+  id          Int          @id @default(autoincrement())
+  group       Group?       @relation(fields: [groupId], references: [id])
+  groupId     Int?
+  name        String
+  price       Float
+  tags        Tag[]
+  remark      String?
+  tickegGoods TicketGood[]
+}
+
+model Tag {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  goods Good[]
+}
+
+model Ticket {
+  id          Int          @id @default(autoincrement())
+  group       Group?       @relation(fields: [groupId], references: [id])
+  groupId     Int?
+  total       Float
+  ticketGoods TicketGood[]
+  customId    String?
+  remark      String?
+}
+
+model TicketGood {
+  id       Int     @id @default(autoincrement())
+  ticket   Ticket? @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  ticketId Int?
+  number   Int
+  good     Good    @relation(fields: [goodId], references: [id])
+  goodId   Int
+  customer String?
+}
