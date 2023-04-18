@@ -1,15 +1,33 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTicketGoodDto } from './dto/create-ticket-good.dto';
 import { UpdateTicketGoodDto } from './dto/update-ticket-good.dto';
+import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class TicketGoodsService {
+  constructor(private prisma: PrismaService) {}
+
   create(createTicketGoodDto: CreateTicketGoodDto) {
-    return 'This action adds a new ticketGood';
+    return this.prisma.ticketGood.create({
+      data: {
+        good: {
+          connect: {
+            id: createTicketGoodDto.goodId,
+          },
+        },
+        number: createTicketGoodDto.number,
+        remark: createTicketGoodDto.remark,
+        ticket: {
+          connect: {
+            id: createTicketGoodDto.ticketId,
+          },
+        },
+      },
+    });
   }
 
   findAll() {
-    return `This action returns all ticketGoods`;
+    return this.prisma.ticketGood.findMany();
   }
 
   findOne(id: number) {
@@ -17,10 +35,25 @@ export class TicketGoodsService {
   }
 
   update(id: number, updateTicketGoodDto: UpdateTicketGoodDto) {
-    return `This action updates a #${id} ticketGood`;
+    return this.prisma.ticketGood.update({
+      where: {
+        id,
+      },
+      data: {
+        good: {
+          connect: {
+            id: updateTicketGoodDto.goodId,
+          },
+        },
+        number: updateTicketGoodDto.number,
+        remark: updateTicketGoodDto.remark,
+      },
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} ticketGood`;
+    return this.prisma.ticketGood.delete({
+      where: { id },
+    });
   }
 }

@@ -18,7 +18,6 @@ export class TicketsService {
                 connect: { id: i.goodId },
               },
               number: i.number,
-              customer: '',
             };
           }),
         },
@@ -37,7 +36,11 @@ export class TicketsService {
   findAll() {
     return this.prisma.ticket.findMany({
       include: {
-        ticketGoods: true,
+        ticketGoods: {
+          include: {
+            good: true,
+          },
+        },
       },
     });
   }
