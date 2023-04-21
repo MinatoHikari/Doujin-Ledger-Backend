@@ -37,7 +37,9 @@ export class GoodsService {
   }
 
   findAll() {
-    return this.prisma.good.findMany();
+    return this.prisma.good.findMany({
+      include: { tags: true },
+    });
   }
 
   findOne(id: number) {
@@ -62,6 +64,9 @@ export class GoodsService {
               },
             };
           }),
+          set: updateGoodDto.tags.map((i) => ({
+            name: i,
+          })),
         },
         group: {
           connect: {

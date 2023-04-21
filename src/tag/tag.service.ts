@@ -1,15 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTagDto } from './dto/create-tag.dto';
 import { UpdateTagDto } from './dto/update-tag.dto';
+import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
 export class TagService {
+  constructor(private prisma: PrismaService) {}
+
   create(createTagDto: CreateTagDto) {
     return 'This action adds a new tag';
   }
 
   findAll() {
-    return `This action returns all tag`;
+    return this.prisma.tag.findMany();
   }
 
   findOne(id: number) {
@@ -21,6 +24,8 @@ export class TagService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} tag`;
+    return this.prisma.tag.delete({
+      where: { id },
+    });
   }
 }
