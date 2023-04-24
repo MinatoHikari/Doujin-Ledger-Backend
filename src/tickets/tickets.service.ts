@@ -3,6 +3,7 @@ import { CreateTicketDto } from './dto/create-ticket.dto';
 import { UpdateTicketDto } from './dto/update-ticket.dto';
 import { PrismaService } from 'src/prisma.service';
 import { GroupService } from 'src/group/group.service';
+import * as dayjs from 'dayjs';
 
 @Injectable()
 export class TicketsService {
@@ -21,6 +22,7 @@ export class TicketsService {
             };
           }),
         },
+        createTime: dayjs().toDate(),
         total: createTicketDto.ticketGoods.reduce((pv, data) => {
           return pv + data.number * data.price;
         }, 0),

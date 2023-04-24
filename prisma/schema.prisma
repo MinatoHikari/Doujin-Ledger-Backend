@@ -40,6 +40,7 @@ model Ticket {
   groupId     Int?
   total       Float
   ticketGoods TicketGood[]
+  createTime  DateTime
   customId    String?
   remark      String?
 }
