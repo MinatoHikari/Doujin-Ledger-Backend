@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { CreateGoodDto } from './dto/create-good.dto';
 import { UpdateGoodDto } from './dto/update-good.dto';
 import { PrismaService } from '../prisma.service';
-import { Tag } from '@prisma/client';
 import { GroupService } from 'src/group/group.service';
 
 @Injectable()
@@ -46,7 +45,7 @@ export class GoodsService {
     return `This action returns a #${id} good`;
   }
 
-  update(id: number, updateGoodDto: UpdateGoodDto) {
+  async update(id: number, updateGoodDto: UpdateGoodDto) {
     return this.prisma.good.update({
       where: { id },
       data: {

@@ -12,7 +12,16 @@ export class TagService {
   }
 
   findAll() {
-    return this.prisma.tag.findMany();
+    return this.prisma.tag
+      .findMany({
+        where: {
+          goods: {},
+        },
+        include: {
+          goods: true,
+        },
+      })
+      .then((tags) => tags.filter((i) => i.goods.length > 0));
   }
 
   findOne(id: number) {
