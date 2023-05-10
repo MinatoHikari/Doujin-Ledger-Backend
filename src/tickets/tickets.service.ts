@@ -4,6 +4,7 @@ import { UpdateTicketDto } from './dto/update-ticket.dto';
 import { PrismaService } from 'src/prisma.service';
 import { GroupService } from 'src/group/group.service';
 import * as dayjs from 'dayjs';
+import { log } from 'console';
 
 @Injectable()
 export class TicketsService {
@@ -29,6 +30,13 @@ export class TicketsService {
         group: {
           connect: {
             id: this.group.group.id,
+          },
+        },
+      },
+      include: {
+        ticketGoods: {
+          include: {
+            good: true,
           },
         },
       },
@@ -79,6 +87,13 @@ export class TicketsService {
         group: {
           connect: {
             id: this.group.group.id,
+          },
+        },
+      },
+      include: {
+        ticketGoods: {
+          include: {
+            good: true,
           },
         },
       },
