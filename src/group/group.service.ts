@@ -49,6 +49,14 @@ export class GroupService {
     return groups[0];
   }
 
+  async findByName(name: string) {
+    return await this.prisma.group.findFirst({
+      where: {
+        name,
+      },
+    });
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} group`;
   }
