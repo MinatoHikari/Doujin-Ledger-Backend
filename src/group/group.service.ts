@@ -11,6 +11,14 @@ export class GroupService {
     this.prisma.group
       .findMany({
         take: 1,
+        include: {
+          goods: {
+            include: {
+              tags: true,
+              ticketGoods: true,
+            },
+          },
+        },
       })
       .then((groups) => {
         if (groups.length !== 0) this.group = groups[0];
@@ -44,6 +52,14 @@ export class GroupService {
   async findAll() {
     const groups = await this.prisma.group.findMany({
       take: 1,
+      include: {
+        goods: {
+          include: {
+            tags: true,
+            ticketGoods: true,
+          },
+        },
+      },
     });
     if (groups.length === 0) return undefined;
     return groups[0];
@@ -61,6 +77,14 @@ export class GroupService {
     return this.prisma.group.delete({
       where: {
         id,
+      },
+      include: {
+        goods: {
+          include: {
+            tags: true,
+            ticketGoods: true,
+          },
+        },
       },
     });
   }
