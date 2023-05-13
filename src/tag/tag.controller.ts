@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { TagService } from './tag.service';
 import { CreateTagDto } from './dto/create-tag.dto';
 import { UpdateTagDto } from './dto/update-tag.dto';
@@ -13,8 +22,16 @@ export class TagController {
   }
 
   @Get()
-  findAll() {
-    return this.tagService.findAll();
+  findAll(
+    @Query('hasGoods', {
+      transform(value, metadata) {
+        if (value === 'true') return true;
+        return false;
+      },
+    })
+    hasGoods: boolean,
+  ) {
+    return this.tagService.findAll(hasGoods);
   }
 
   @Get(':id')

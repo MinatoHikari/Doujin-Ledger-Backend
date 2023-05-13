@@ -3,6 +3,6 @@ import { CreateTicketGoodDto } from './create-ticket-good.dto';
 
 export class UpdateTicketGoodDto extends PartialType(CreateTicketGoodDto) {
   remark?: string;
-  goodId: number;
+  goodId?: number;
   number: number;
 }

@@ -20,9 +20,9 @@ export class TicketGoodsController {
     return this.ticketGoodsService.create(createTicketGoodDto);
   }
 
-  @Get()
-  findAll() {
-    return this.ticketGoodsService.findAll();
+  @Get('/ticket-id/:id')
+  findByTicketId(@Param('id') id: string) {
+    return this.ticketGoodsService.findByTicketId(+id);
   }
 
   @Get(':id')

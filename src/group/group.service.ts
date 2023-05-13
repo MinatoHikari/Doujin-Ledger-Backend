@@ -4,6 +4,7 @@ import { UpdateGroupDto } from './dto/update-group.dto';
 import { PrismaService } from 'src/prisma.service';
 import { Group } from '@prisma/client';
 
+let group: Group | null = null;
 @Injectable()
 export class GroupService {
   constructor(private prisma: PrismaService) {
@@ -16,7 +17,12 @@ export class GroupService {
       });
   }
 
-  group: Group | null = null;
+  get group() {
+    return group;
+  }
+  set group(v) {
+    group = v;
+  }
 
   async create(createGroupDto: CreateGroupDto) {
     const groups = await this.prisma.group.findMany({

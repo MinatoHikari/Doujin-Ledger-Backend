@@ -17,9 +17,7 @@ export class TicketsController {
 
   @Post()
   async create(@Body() createTicketDto: CreateTicketDto) {
-    const res = await this.ticketsService.create(createTicketDto);
-    console.log(res);
-    return res;
+    return await this.ticketsService.create(createTicketDto);
   }
 
   @Get()

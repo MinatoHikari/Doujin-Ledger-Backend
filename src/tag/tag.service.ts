@@ -8,20 +8,32 @@ export class TagService {
   constructor(private prisma: PrismaService) {}
 
   create(createTagDto: CreateTagDto) {
-    return 'This action adds a new tag';
+    return this.prisma.tag.create({
+      data: {
+        name: createTagDto.name,
+      },
+      include: {
+        goods: {
+          include: { tags: true },
+        },
+      },
+    });
   }
 
-  findAll() {
+  findAll(hasGoods: boolean) {
     return this.prisma.tag
       .findMany({
-        where: {
-          goods: {},
-        },
         include: {
           goods: true,
         },
       })
-      .then((tags) => tags.filter((i) => i.goods.length > 0));
+      .then((tags) => {
+        if (hasGoods)
+          return tags.filter((i) => {
+            return i.goods.length > 0;
+          });
+        else return tags;
+      });
   }
 
   findOne(id: number) {

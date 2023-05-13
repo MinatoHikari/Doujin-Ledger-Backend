@@ -25,7 +25,7 @@ model Good {
   price       Float
   tags        Tag[]
   remark      String?
-  tickegGoods TicketGood[]
+  ticketGoods TicketGood[]
 }
 
 model Tag {
