@@ -27,7 +27,7 @@ export class GroupController {
   }
 
   @Get('by-name')
-  findByName(@Query() name: string) {
+  findByName(@Query('name') name: string) {
     return this.groupService.findByName(name);
   }
 
