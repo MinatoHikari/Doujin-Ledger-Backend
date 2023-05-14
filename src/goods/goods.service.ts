@@ -37,7 +37,12 @@ export class GoodsService {
 
   findAll() {
     return this.prisma.good.findMany({
-      include: { tags: true },
+      include: {
+        tags: true,
+        ticketGoods: {
+          include: { good: true },
+        },
+      },
     });
   }
 
