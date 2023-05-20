@@ -55,7 +55,18 @@ export class TicketsService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} ticket`;
+    return this.prisma.ticket.findFirst({
+      where: {
+        id,
+      },
+      include: {
+        ticketGoods: {
+          include: {
+            good: true,
+          },
+        },
+      },
+    });
   }
 
   update(id: number, updateTicketDto: UpdateTicketDto) {
