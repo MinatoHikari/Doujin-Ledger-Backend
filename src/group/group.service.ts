@@ -62,7 +62,12 @@ export class GroupService {
   }
 
   update(id: number, updateGroupDto: UpdateGroupDto) {
-    return `This action updates a #${id} group`;
+    return this.prisma.group.update({
+      where: { id },
+      data: {
+        name: updateGroupDto.name,
+      },
+    });
   }
 
   remove(id: number) {
