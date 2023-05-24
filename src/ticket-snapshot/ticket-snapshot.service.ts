@@ -55,6 +55,9 @@ export class TicketSnapshotService {
   remove(id: string) {
     return this.prisma.ticketSnapshot.delete({
       where: { id },
+      include: {
+        list: true,
+      },
     });
   }
 }
