@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { CreateTicketSnapshotDto } from './dto/create-ticket-snapshot.dto';
 import { UpdateTicketSnapshotDto } from './dto/update-ticket-snapshot.dto';
 import { PrismaService } from 'src/prisma.service';
-import { SnapshotItem } from '../snapshot-item/entities/snapshot-item.entity';
 
 @Injectable()
 export class TicketSnapshotService {
@@ -22,6 +21,9 @@ export class TicketSnapshotService {
             };
           }),
         },
+      },
+      include: {
+        list: true,
       },
     });
   }
@@ -43,6 +45,9 @@ export class TicketSnapshotService {
       where: { id },
       data: {
         state: updateTicketSnapshotDto.state,
+      },
+      include: {
+        list: true,
       },
     });
   }
