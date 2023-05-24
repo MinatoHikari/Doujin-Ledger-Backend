@@ -3,4 +3,5 @@ export class CreateGoodDto {
   readonly price: number;
   readonly remark: string;
   readonly tags: string[];
+  readonly stock: number;
 }

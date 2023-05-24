@@ -7,4 +7,5 @@ export class UpdateGoodDto extends PartialType(CreateGoodDto) {
   readonly remark: string;
   readonly id: number;
   readonly tags: string[];
+  readonly stock: number;
 }
