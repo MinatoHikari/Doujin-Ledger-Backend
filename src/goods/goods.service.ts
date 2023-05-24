@@ -14,6 +14,7 @@ export class GoodsService {
         name: createGoodDto.name,
         price: createGoodDto.price,
         remark: createGoodDto.remark,
+        stock: createGoodDto.stock,
         tags: {
           connectOrCreate: (createGoodDto.tags ?? []).map((tag) => {
             return {
@@ -57,6 +58,7 @@ export class GoodsService {
         name: updateGoodDto.name,
         price: updateGoodDto.price,
         remark: updateGoodDto.remark,
+        stock: updateGoodDto.stock,
         tags: {
           connectOrCreate: (updateGoodDto.tags ?? []).map((tag) => {
             return {
