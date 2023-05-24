@@ -52,6 +52,36 @@ export class TicketSnapshotService {
     });
   }
 
+  override(id: string, updateTicketSnapshotDto: UpdateTicketSnapshotDto) {
+    return this.prisma.snapshotItem
+      .deleteMany({
+        where: {
+          snapshotId: id,
+        },
+      })
+      .then(() => {
+        return this.prisma.ticketSnapshot.update({
+          where: { id },
+          data: {
+            createTime: updateTicketSnapshotDto.createTime,
+            id: updateTicketSnapshotDto.id,
+            state: updateTicketSnapshotDto.state,
+            list: {
+              create: updateTicketSnapshotDto.list.map((i) => {
+                return {
+                  number: i.number,
+                  name: i.name,
+                };
+              }),
+            },
+          },
+          include: {
+            list: true,
+          },
+        });
+      });
+  }
+
   remove(id: string) {
     return this.prisma.ticketSnapshot.delete({
       where: { id },

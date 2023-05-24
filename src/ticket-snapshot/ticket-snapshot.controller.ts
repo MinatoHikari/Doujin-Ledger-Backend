@@ -38,6 +38,14 @@ export class TicketSnapshotController {
     return this.ticketSnapshotService.update(id, updateTicketSnapshotDto);
   }
 
+  @Post('override/:id')
+  override(
+    @Param('id') id: string,
+    @Body() updateTicketSnapshotDto: UpdateTicketSnapshotDto,
+  ) {
+    return this.ticketSnapshotService.override(id, updateTicketSnapshotDto);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.ticketSnapshotService.remove(id);
