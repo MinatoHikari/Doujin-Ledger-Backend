@@ -10,7 +10,15 @@ import { TicketSnapshotModule } from './ticket-snapshot/ticket-snapshot.module';
 import { SnapshotItemModule } from './snapshot-item/snapshot-item.module';
 
 @Module({
-  imports: [GoodsModule, TicketsModule, GroupModule, TagModule, TicketGoodsModule, TicketSnapshotModule, SnapshotItemModule],
+  imports: [
+    GoodsModule,
+    TicketsModule,
+    GroupModule,
+    TagModule,
+    TicketGoodsModule,
+    TicketSnapshotModule,
+    SnapshotItemModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
