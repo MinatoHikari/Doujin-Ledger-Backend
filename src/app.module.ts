@@ -8,6 +8,7 @@ import { TagModule } from './tag/tag.module';
 import { TicketGoodsModule } from './ticket-goods/ticket-goods.module';
 import { TicketSnapshotModule } from './ticket-snapshot/ticket-snapshot.module';
 import { SnapshotItemModule } from './snapshot-item/snapshot-item.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -18,6 +19,10 @@ import { SnapshotItemModule } from './snapshot-item/snapshot-item.module';
     TicketGoodsModule,
     TicketSnapshotModule,
     SnapshotItemModule,
+    ConfigModule.forRoot({
+      envFilePath: '.env.local',
+      isGlobal: true,
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

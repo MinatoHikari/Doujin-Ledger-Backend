@@ -9,6 +9,6 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalInterceptors(new TransformInterceptor());
   app.use(auth);
-  await app.listen(3000);
+  await app.listen(process.env.port);
 }
 bootstrap();
